@@ -1,0 +1,9 @@
+---
+- name: Create RabbitMQ dev image
+  hosts: local
+
+  roles:
+  - installation
+
+  vars_files:
+  - vars/develop.yml
