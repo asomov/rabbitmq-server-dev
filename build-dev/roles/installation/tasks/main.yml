@@ -8,13 +8,19 @@
   - vim
   - git
   - build-essential
-#  - xmlto
-##  libxslt requires these 3
-#  - libxml2-dev
-#  - libxslt1-dev
-#  - python-dev
+  - xmlto
+#  libxslt requires these 3
+  - libxml2-dev
+  - libxslt1-dev
+  - python-dev
   - openssl
   - libncurses5-dev
+
+- name: install rebar
+  get_url:
+    url: https://github.com/rebar/rebar/wiki/rebar
+    dest: /bin/rebar
+    mode: 0777
 
 - name: install kerl
   get_url:
@@ -34,3 +40,16 @@
       path: /etc/bash.bashrc
       line: '. /opt/kerl/{{ otp_version }}/activate'
 
+- name: install elixir
+  apt: name={{ item }} state=present update_cache=yes
+  with_items:
+  - elixir
+
+- name: clone server
+  git:
+      repo: https://github.com/rabbitmq/rabbitmq-server.git
+      dest: /projects/rabbitmq-server
+      version: master
+
+#- name: make
+#  command: chdir=/projects/rabbitmq-server make
