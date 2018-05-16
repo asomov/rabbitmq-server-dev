@@ -3,6 +3,34 @@
   apt: name={{ item }} state=present update_cache=yes
   with_items:
   - wget
+  - curl
+  - less
+  - vim
   - git
+  - build-essential
+#  - xmlto
+##  libxslt requires these 3
+#  - libxml2-dev
+#  - libxslt1-dev
+#  - python-dev
+  - openssl
+  - libncurses5-dev
 
+- name: install kerl
+  get_url:
+    url: https://raw.githubusercontent.com/kerl/kerl/master/kerl
+    dest: /kerl
+    mode: 0777
+
+- name: build Erlang {{ otp_version }}
+  command: /kerl build {{ otp_version }} {{ otp_version }}
+
+- name: install Erlang {{ otp_version }}
+  command: /kerl install {{ otp_version }} /opt/kerl/{{ otp_version }}
+
+- name: configure Erlang activation for bash
+  lineinfile:
+      insertafter: EOF
+      path: /etc/bash.bashrc
+      line: '. /opt/kerl/{{ otp_version }}/activate'
 
