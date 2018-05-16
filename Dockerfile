@@ -11,4 +11,6 @@ ADD build-dev /ansible/build-dev
 WORKDIR /ansible/build-dev
 RUN ansible-playbook rabbitmq-dev.yaml -c local
 
+WORKDIR /projects/rabbitmq-server
+
 
