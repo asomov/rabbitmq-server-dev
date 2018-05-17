@@ -39,11 +39,11 @@
 - name: install Erlang {{ otp_version }}
   command: /kerl install {{ otp_version }} /opt/kerl/{{ otp_version }}
 
-- name: configure Erlang activation for bash
+- name: configure Erlang activation for bash (for container)
   lineinfile:
       insertafter: EOF
       path: /etc/bash.bashrc
-      line: '. /opt/kerl/{{ otp_version }}/activate'
+      line: 'source /opt/kerl/{{ otp_version }}/activate'
 
 - name: 'download elixir {{ elixir_version }}'
   get_url:
@@ -56,21 +56,26 @@
       dest: /opt
       remote_src: yes
 
-- name: build elixir with make
-  make:
-      chdir: /opt/elixir-{{ elixir_version }}
+- name: install Elixir builder script
+  template: src=build-elixir.sh dest={{ elixir_path }} mode=0700
 
-- name: add elixir to PATH
+- name: build Elixir
+  command: '{{ elixir_path }}/build-elixir.sh'
+
+- name: add elixir's bin to PATH (for container)
   lineinfile:
       insertafter: EOF
       path: /etc/bash.bashrc
-      line: 'export PATH=$PATH:{{ elixir_path }}'
+      line: 'export PATH=$PATH:{{ elixir_path }}/bin'
 
-- name: clone server
+- name: clone RabbitMQ server source
   git:
       repo: https://github.com/rabbitmq/rabbitmq-server.git
-      dest: /projects/rabbitmq-server
+      dest: '{{ rabbitmq_destination }}'
       version: master
 
-#- name: make
-#  command: chdir=/projects/rabbitmq-server make
+- name: install RabbitMQ builder script
+  template: src=build-rabbitmq.sh dest={{ rabbitmq_destination }} mode=0700
+
+- name: build RabbitMQ server
+  command: '{{ rabbitmq_destination }}/build-rabbitmq.sh'
