@@ -14,7 +14,10 @@
   - libxslt1-dev
   - python-dev
   - openssl
+  - libssl-dev
   - libncurses5-dev
+  - automake
+  - autoconf
 
 - name: install rebar
   get_url:
@@ -30,6 +33,8 @@
 
 - name: build Erlang {{ otp_version }}
   command: /kerl build {{ otp_version }} {{ otp_version }}
+  environment:
+      KERL_CONFIGURE_OPTIONS: '--with-ssl=/usr/include/openssl --without-javac --enable-shared-zlib --enable-dynamic-ssl-lib --enable-hipe --enable-smp-support --enable-threads --enable-kernel-poll'
 
 - name: install Erlang {{ otp_version }}
   command: /kerl install {{ otp_version }} /opt/kerl/{{ otp_version }}
@@ -40,10 +45,26 @@
       path: /etc/bash.bashrc
       line: '. /opt/kerl/{{ otp_version }}/activate'
 
-- name: install elixir
-  apt: name={{ item }} state=present update_cache=yes
-  with_items:
-  - elixir
+- name: 'download elixir {{ elixir_version }}'
+  get_url:
+    url: https://github.com/elixir-lang/elixir/archive/v{{ elixir_version }}.tar.gz
+    dest: /elixir-v{{ elixir_version }}.tar.gz
+
+- name: unzip elixir in /opt
+  unarchive:
+      src: /elixir-v{{ elixir_version }}.tar.gz
+      dest: /opt
+      remote_src: yes
+
+- name: build elixir with make
+  make:
+      chdir: /opt/elixir-{{ elixir_version }}
+
+- name: add elixir to PATH
+  lineinfile:
+      insertafter: EOF
+      path: /etc/bash.bashrc
+      line: 'export PATH=$PATH:{{ elixir_path }}'
 
 - name: clone server
   git:
