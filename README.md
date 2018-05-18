@@ -6,7 +6,7 @@ This is a development environment of RabbitMQ server
 
 All modules are licensed under [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0.txt).
 
-## Usage
+## Build
 
 Build Docker image
 
@@ -22,26 +22,22 @@ Build Docker image
 
 ```docker run -it rabbitmq-server-dev bash```
 
-## Problem
+## Usage
 
-Run ```make``` in the container:
+- change the code
+- run the tests
+- contribute a patch
 
-```# make```
+Running Tests is described in [CONTRIBUTING](https://github.com/rabbitmq/rabbitmq-server/blob/master/CONTRIBUTING.md#running-tests)
 
-```** (ArgumentError) argument error
-       (stdlib) erl_anno.erl:322: :erl_anno.set(:file, 'nofile', -1)
-       (stdlib) erl_parse.yrl:1558: anonymous fn/3 in :erl_parse.map_anno/2
-       (stdlib) erl_parse.yrl:1670: :erl_parse.modify_anno1/3
-       (stdlib) erl_parse.yrl:1693: :erl_parse.modify_anno1/3
-       (stdlib) erl_parse.yrl:1694: :erl_parse.modify_anno1/3
-       (stdlib) erl_parse.yrl:1672: :erl_parse.modify_anno1/3
-       (stdlib) erl_parse.yrl:1693: :erl_parse.modify_anno1/3
-       (stdlib) erl_parse.yrl:1672: :erl_parse.modify_anno1/3
-```
+```make tests```
 
-The whole error [is here](https://gist.github.com/asomov/8094aa2758e5b611b88b3abfffd8d6ab)
+My Intel i7 with 4 cores runs the whole test suite approx. 2 hours
 
-Any help is appriciated...
+## TODO
+
+- describe how to share volume with host 
+- [rmq-collect-env](https://github.com/rabbitmq/support-tools/blob/master/scripts/rabbitmq-collect-env)
 
 
 
