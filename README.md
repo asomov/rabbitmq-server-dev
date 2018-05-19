@@ -16,11 +16,17 @@ Build Docker image
 
 ```cd rabbitmq-server-dev```
 
+Use default Erlang OTP version 20.3 and elixir 1.6.5:
+
 ```docker build -t rabbitmq-server-dev .```
+
+Use any available Erlang OTP version (RabbitMQ 3.6.15+ requires Erlang 19.3+), or elixir version:
+
+```docker build --build-arg OTP_VERSION=19.3 --build-arg ELIXIR_VERSION=1.6.5 -t rabbitmq-server-dev .```
 
 * Run docker container
 
-```docker run -it rabbitmq-server-dev bash```
+```docker run -it rabbitmq-server-dev```
 
 ## Usage
 
@@ -36,8 +42,8 @@ My Intel i7 with 4 cores runs the whole test suite approx. 2 hours
 
 ## TODO
 
-- describe how to share volume with host 
-- [rmq-collect-env](https://github.com/rabbitmq/support-tools/blob/master/scripts/rabbitmq-collect-env)
+- describe how to share source volume with host 
+- configure branch
 
 
 

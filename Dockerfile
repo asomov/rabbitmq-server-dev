@@ -12,7 +12,9 @@ RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
     update-locale LANG=en_US.UTF-8
 ENV LANG en_US.UTF-8
 
-ENV OTP_VERSION 20.3
+ARG OTP_VERSION
+ENV OTP_VERSION ${OTP_VERSION:20.3}
+
 # install rebar
 ADD https://github.com/rebar/rebar/wiki/rebar /bin/rebar
 RUN chmod +x /bin/rebar
@@ -32,7 +34,8 @@ RUN /bin/kerl install $OTP_VERSION /opt/kerl/$OTP_VERSION
 RUN echo ". /opt/kerl/$OTP_VERSION/activate" >> /etc/bash.bashrc
 
 # download and build elixir
-ENV ELIXIR_VERSION 1.6.5
+ARG ELIXIR_VERSION
+ENV ELIXIR_VERSION ${ELIXIR_VERSION:1.6.5}
 ADD https://github.com/elixir-lang/elixir/archive/v${ELIXIR_VERSION}.tar.gz /opt/elixir-v${ELIXIR_VERSION}.tar.gz
 WORKDIR /opt
 RUN tar xzf elixir-v${ELIXIR_VERSION}.tar.gz
@@ -50,6 +53,8 @@ COPY build-rabbitmq.sh /projects/rabbitmq-server/
 RUN chmod +x /projects/rabbitmq-server/build-rabbitmq.sh
 WORKDIR /projects/rabbitmq-server
 RUN ./build-rabbitmq.sh
+
+CMD ["bash"]
 
 
 
