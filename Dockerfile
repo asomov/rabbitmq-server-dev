@@ -13,7 +13,7 @@ RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
 ENV LANG en_US.UTF-8
 
 ARG OTP_VERSION
-ENV OTP_VERSION ${OTP_VERSION:20.3}
+ENV OTP_VERSION ${OTP_VERSION:-20.3}
 
 # install rebar
 ADD https://github.com/rebar/rebar/wiki/rebar /bin/rebar
@@ -35,7 +35,7 @@ RUN echo ". /opt/kerl/$OTP_VERSION/activate" >> /etc/bash.bashrc
 
 # download and build elixir
 ARG ELIXIR_VERSION
-ENV ELIXIR_VERSION ${ELIXIR_VERSION:1.6.5}
+ENV ELIXIR_VERSION ${ELIXIR_VERSION:-1.6.5}
 ADD https://github.com/elixir-lang/elixir/archive/v${ELIXIR_VERSION}.tar.gz /opt/elixir-v${ELIXIR_VERSION}.tar.gz
 WORKDIR /opt
 RUN tar xzf elixir-v${ELIXIR_VERSION}.tar.gz
