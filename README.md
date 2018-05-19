@@ -51,6 +51,10 @@ following command will replace the source from the container with the source fro
 ```
 This way is much simpler to use git or other tools.
 
+* This may help to avoid creating files with root provileges by docker:
+
+```--user `id -u`:`id -g````
+
 ## Usage
 
 The instructions how to run/tests the projects can be found on [Rabbit Public Umbrella](https://github.com/rabbitmq/rabbitmq-public-umbrella)
