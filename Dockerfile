@@ -45,14 +45,14 @@ WORKDIR /opt/elixir-$ELIXIR_VERSION
 RUN ./build-elixir.sh
 ENV PATH $PATH:/opt/elixir-${ELIXIR_VERSION}/bin
 
-# clone and build RabbitMQ server
+# checkout all the projects using https://github.com/rabbitmq/rabbitmq-public-umbrella
 RUN mkdir /projects
 WORKDIR /projects
-RUN git clone https://github.com/rabbitmq/rabbitmq-server.git
-COPY build-rabbitmq.sh /projects/rabbitmq-server/
-RUN chmod +x /projects/rabbitmq-server/build-rabbitmq.sh
-WORKDIR /projects/rabbitmq-server
-RUN ./build-rabbitmq.sh
+RUN git clone https://github.com/rabbitmq/rabbitmq-public-umbrella.git
+WORKDIR /projects/rabbitmq-public-umbrella
+COPY build-umbrella.sh /projects/rabbitmq-public-umbrella/
+RUN chmod +x /projects/rabbitmq-public-umbrella/build-umbrella.sh
+RUN ./build-umbrella.sh
 
 CMD ["bash"]
 
