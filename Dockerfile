@@ -54,6 +54,8 @@ COPY build-umbrella.sh /projects/rabbitmq-public-umbrella/
 RUN chmod +x /projects/rabbitmq-public-umbrella/build-umbrella.sh
 RUN ./build-umbrella.sh
 
+WORKDIR /projects/rabbitmq-public-umbrella/deps
+
 CMD ["bash"]
 
 

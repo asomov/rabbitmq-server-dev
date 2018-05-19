@@ -1,12 +1,14 @@
 ## Overview
 
-This is a development environment of RabbitMQ 
+This is a development environment of RabbitMQ.
+This image allows to build and run all the components without installing any Erlang utilities.
+(including Erlang itself). Only docker is required :-)
 
 ## License
 
 All modules are licensed under [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0.txt).
 
-## Build
+## Build the image
 
 Build Docker image
 
@@ -28,17 +30,28 @@ You might give the image another name to distinguish from other versions.
 
 (It takes more than 20 minutes to build the image, most of the time takes the Erlang build)
 
+## Run the container
 
-* Run docker container
+* Run the docker container and develop inside it. 
 
-```docker run -it rabbitmq-server-dev```
+```docker run --rm -it rabbitmq-server-dev```
+
+
+## Run the container and map the source from the host to container
+
+Check out a project and use volume to map it into the container.
+
+For instance, if the current folder is the source of rabbitmq-server, then the
+following command will replace the source from the container with the source from the host. 
+
+```docker run --rm -it      \
+     -u `id -u`:`id -g`     \
+     -v `pwd`:/projects/rabbitmq-public-umbrella/deps/rabbit \
+     rabbitmq-server-dev
+```
+This way is much simpler to use git or other tools.
 
 ## Usage
-
-The source code for all the projects is checked out under ```/projects/rabbitmq-public-umbrella/deps```
-
-You can share the source code with the container as a docker volume, change the source and run code/tests inside the container,
-which has all the dependencies and utilities installed.
 
 The instructions how to run/tests the projects can be found on [Rabbit Public Umbrella](https://github.com/rabbitmq/rabbitmq-public-umbrella)
 
@@ -48,10 +61,6 @@ Running Tests is also described in [CONTRIBUTING](https://github.com/rabbitmq/ra
 
 (Intel i7 with 4 cores runs the whole test suite for RabbitMQ server for approx. 2 hours)
 
-## TODO
-
-- describe how to share source volume with host 
-- configure branch ?
 
 
 
