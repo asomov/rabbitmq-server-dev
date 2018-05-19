@@ -6,7 +6,7 @@ This image allows to build and run all the components without installing any Erl
 
 ## License
 
-All modules are licensed under [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0.txt).
+All code is licensed under [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0.txt).
 
 ## Build the image
 
@@ -30,6 +30,7 @@ You might give the image another name to distinguish from other versions.
 
 (It takes more than 20 minutes to build the image, most of the time takes the Erlang build)
 
+
 ## Run the container
 
 * Run the docker container and develop inside it. 
@@ -45,7 +46,6 @@ For instance, if the current folder is the source of rabbitmq-server, then the
 following command will replace the source from the container with the source from the host. 
 
 ```docker run --rm -it      \
-     -u `id -u`:`id -g`     \
      -v `pwd`:/projects/rabbitmq-public-umbrella/deps/rabbit \
      rabbitmq-server-dev
 ```
@@ -54,6 +54,7 @@ This way is much simpler to use git or other tools.
 * This may help to avoid creating files with root provileges by docker:
 
 ```--user `id -u`:`id -g````
+
 
 ## Usage
 
