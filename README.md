@@ -1,6 +1,6 @@
 ## Overview
 
-This is a development environment of RabbitMQ server 
+This is a development environment of RabbitMQ 
 
 ## License
 
@@ -24,26 +24,34 @@ Use any available Erlang OTP version (RabbitMQ 3.6.15+ requires Erlang 19.3+), o
 
 ```docker build --build-arg OTP_VERSION=19.3 --build-arg ELIXIR_VERSION=1.6.5 -t rabbitmq-server-dev .```
 
+You might give the image another name to distinguish from other versions.
+
+(It takes more than 20 minutes to build the image, most of the time takes the Erlang build)
+
+
 * Run docker container
 
 ```docker run -it rabbitmq-server-dev```
 
 ## Usage
 
-- change the code
-- run the tests
-- contribute a patch
+The source code for all the projects is checked out under ```/projects/rabbitmq-public-umbrella/deps```
 
-Running Tests is described in [CONTRIBUTING](https://github.com/rabbitmq/rabbitmq-server/blob/master/CONTRIBUTING.md#running-tests)
+You can share the source code with the container as a docker volume, change the source and run code/tests inside the container,
+which has all the dependencies and utilities installed.
+
+The instructions how to run/tests the projects can be found on [Rabbit Public Umbrella](https://github.com/rabbitmq/rabbitmq-public-umbrella)
+
+Running Tests is also described in [CONTRIBUTING](https://github.com/rabbitmq/rabbitmq-server/blob/master/CONTRIBUTING.md#running-tests):
 
 ```make tests```
 
-My Intel i7 with 4 cores runs the whole test suite approx. 2 hours
+(Intel i7 with 4 cores runs the whole test suite for RabbitMQ server for approx. 2 hours)
 
 ## TODO
 
 - describe how to share source volume with host 
-- configure branch
+- configure branch ?
 
 
 
