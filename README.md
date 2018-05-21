@@ -45,7 +45,8 @@ Check out a project and use volume to map it into the container.
 For instance, if the current folder is the source of rabbitmq-server, then the
 following command will replace the source from the container with the source from the host. 
 
-```docker run --rm -it      \
+```
+docker run --rm -it      \
      -v `pwd`:/projects/rabbitmq-public-umbrella/deps/rabbit \
      rabbitmq-server-dev
 ```
