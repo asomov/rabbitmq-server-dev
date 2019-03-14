@@ -4,7 +4,7 @@ LABEL maintainer="public.somov@gmail.com"
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
    locales wget curl less vim git build-essential automake  \
    xmlto libxml2-dev libxslt1-dev python-dev \
-   openssl libssl-dev libncurses5-dev rsync
+   openssl libssl-dev libncurses5-dev rsync htop
 
 # Set the locale
 RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
