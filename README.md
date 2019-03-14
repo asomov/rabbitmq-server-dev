@@ -18,13 +18,13 @@ Build Docker image
 
 ```cd rabbitmq-server-dev```
 
-Use default Erlang OTP version 20.3 and elixir 1.6.5:
+Use default Erlang OTP version 21.3 and elixir 1.8.1:
 
 ```docker build -t rabbitmq-server-dev .```
 
 Use any available Erlang OTP version (RabbitMQ 3.6.15+ requires Erlang 19.3+), or elixir version:
 
-```docker build --build-arg OTP_VERSION=19.3 --build-arg ELIXIR_VERSION=1.6.5 -t rabbitmq-server-dev .```
+```docker build --build-arg OTP_VERSION=20.3 --build-arg ELIXIR_VERSION=1.8.0 -t rabbitmq-server-dev .```
 
 You might give the image another name to distinguish from other versions.
 

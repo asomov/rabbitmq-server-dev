@@ -1,8 +1,8 @@
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 LABEL maintainer="public.somov@gmail.com"
 
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
-   locales wget curl less vim git build-essential automake autoconf \
+   locales wget curl less vim git build-essential automake  \
    xmlto libxml2-dev libxslt1-dev python-dev \
    openssl libssl-dev libncurses5-dev
 
@@ -13,7 +13,7 @@ RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
 ENV LANG en_US.UTF-8
 
 ARG OTP_VERSION
-ENV OTP_VERSION ${OTP_VERSION:-20.3}
+ENV OTP_VERSION ${OTP_VERSION:-21.3}
 
 # install rebar
 ADD https://github.com/rebar/rebar/wiki/rebar /bin/rebar
@@ -35,7 +35,7 @@ RUN echo ". /opt/kerl/$OTP_VERSION/activate" >> /etc/bash.bashrc
 
 # download and build elixir
 ARG ELIXIR_VERSION
-ENV ELIXIR_VERSION ${ELIXIR_VERSION:-1.6.5}
+ENV ELIXIR_VERSION ${ELIXIR_VERSION:-1.8.1}
 ADD https://github.com/elixir-lang/elixir/archive/v${ELIXIR_VERSION}.tar.gz /opt/elixir-v${ELIXIR_VERSION}.tar.gz
 WORKDIR /opt
 RUN tar xzf elixir-v${ELIXIR_VERSION}.tar.gz
