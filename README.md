@@ -10,7 +10,7 @@ All code is licensed under [Apache License 2.0](http://www.apache.org/licenses/L
 
 ## Build the image
 
-Build Docker image
+Build Docker image (the dependencies are based on https://www.rabbitmq.com/build-server.html#prerequisites)
 
 * Build docker image
 
@@ -52,7 +52,7 @@ docker run --rm -it      \
 ```
 This way is much simpler to use git or other tools.
 
-* This may help to avoid creating files with root provileges by docker:
+* This may help to avoid creating files with root privileges by docker:
 
 ```--user `id -u`:`id -g````
 
@@ -70,3 +70,8 @@ Running Tests is also described in [CONTRIBUTING](https://github.com/rabbitmq/ra
 
 
 
+
+
+https://www.rabbitmq.com/plugin-development.html
+https://github.com/docker-library/rabbitmq/blob/653e7496aa1196e2b55587440d86ad8c9a323008/3.8-rc/ubuntu/Dockerfile
+https://github.com/rabbitmq/rabbitmq-public-umbrella
