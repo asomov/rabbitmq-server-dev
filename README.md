@@ -41,6 +41,7 @@ You might give the image another name to distinguish from other versions.
 ## Run the container and map the source from the host to container
 
 Check out a project and use volume to map it into the container.
+(there is no way to map data from container to host)
 
 For instance, if the current folder is the source of rabbitmq-server, then the
 following command will replace the source from the container with the source from the host. 
@@ -48,6 +49,7 @@ following command will replace the source from the container with the source fro
 ```
 docker run --rm -it      \
      -v `pwd`:/projects/rabbitmq-public-umbrella/deps/rabbit \
+     --name rabbitmq-server-dev \
      rabbitmq-server-dev
 ```
 This way is much simpler to use git or other tools.
