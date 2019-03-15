@@ -35,7 +35,7 @@ You might give the image another name to distinguish from other versions.
 
 * Run the docker container and develop inside it. 
 
-```docker run --rm -it rabbitmq-server-dev```
+```docker run --rm -it --name rabbitmq-server-dev rabbitmq-server-dev```
 
 
 ## Run the container and map the source from the host to container
