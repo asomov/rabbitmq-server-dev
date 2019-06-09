@@ -56,7 +56,7 @@ This way is much simpler to use git or other tools.
 
 * This may help to avoid creating files with root privileges by docker:
 
-```--user `id -u`:`id -g````
+```--user `id -u`:`id -g` ```
 
 
 ## Usage
