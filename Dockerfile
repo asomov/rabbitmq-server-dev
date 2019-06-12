@@ -13,7 +13,7 @@ RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
 ENV LANG en_US.UTF-8
 
 ARG OTP_VERSION
-ENV OTP_VERSION ${OTP_VERSION:-21.3}
+ENV OTP_VERSION ${OTP_VERSION:-22.0}
 
 # install rebar
 ADD https://github.com/rebar/rebar/wiki/rebar /bin/rebar
