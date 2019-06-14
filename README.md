@@ -18,7 +18,7 @@ Build Docker image (the dependencies are based on https://www.rabbitmq.com/build
 
 ```cd rabbitmq-server-dev```
 
-Use default Erlang OTP version 21.3 and elixir 1.8.1:
+Use default Erlang OTP version 22.0 and elixir 1.8.1:
 
 ```docker build -t rabbitmq-server-dev .```
 
@@ -54,6 +54,10 @@ docker run --rm -it      \
 ```
 This way is much simpler to use git or other tools.
 
+This is the way to share the Maven repository with the host
+
+```docker run --rm -it -v /home/somov/.m2/repository/:/root/.m2/repository/ --name rabbitmq-server-dev rabbitmq-server-dev```
+
 * This may help to avoid creating files with root privileges by docker:
 
 ```--user `id -u`:`id -g` ```
@@ -71,8 +75,16 @@ Running Tests is also described in [CONTRIBUTING](https://github.com/rabbitmq/ra
 
 
 
+## Run Java client tests
 
+https://github.com/rabbitmq/rabbitmq-java-client/blob/master/RUNNING_TESTS.md
 
+```
+cd deps/rabbitmq_java_client
+./mvnw -Ddeps.dir=$(pwd)/.. verify -Dit.test=ConnectionRecovery
+```
+
+## Info
 
 https://www.rabbitmq.com/plugin-development.html
 https://github.com/docker-library/rabbitmq/blob/653e7496aa1196e2b55587440d86ad8c9a323008/3.8-rc/ubuntu/Dockerfile

@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM openjdk:11.0.3-jdk-stretch
 LABEL maintainer="public.somov@gmail.com"
 
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
